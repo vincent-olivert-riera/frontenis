@@ -21,7 +21,7 @@ clean:
 # TESTING
 #
 .python-files:
-	find ./backend -type f -name "*.py" -print > $@
+	find ./frontenis -type f -name "*.py" -print > $@
 
 .INTERMEDIATE: .python-files
 

@@ -1,4 +1,4 @@
-"""backend URL Configuration
+"""frontenis URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -13,10 +13,37 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("default.urls")),
+    path("", include("frontend.urls")),
 ]
+
+if not settings.DEBUG:
+    from django.urls import re_path
+    from django.views.static import serve
+
+    urlpatterns.append(
+        re_path(
+            r"^static/(?P<path>.*)$",
+            serve,
+            {"document_root": settings.STATIC_ROOT},
+        ),
+    )
+    urlpatterns.append(
+        re_path(
+            r"^assets/(?P<path>.*)$",
+            serve,
+            {"document_root": settings.STATIC_ROOT / "assets"},
+        ),
+    )
+    urlpatterns.append(
+        re_path(
+            r"^(?P<path>favicon\.ico)$",
+            serve,
+            {"document_root": settings.STATIC_ROOT},
+        ),
+    )

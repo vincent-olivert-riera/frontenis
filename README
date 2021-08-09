@@ -1,0 +1,12 @@
+Debug mode:
+
+- Set `DEBUG = True` in `frontenis/settings.py`
+- Run Vite app: `npm run dev`
+- Run Django: `python manage.py runserver`
+
+Production mode:
+
+- Set `DEBUG = False` in `frontenis/settings.py`
+- Build Vite app: `npm run build`
+- Collect static files: `python manage.py collectstatic`
+- Run Django: `python manage.py runserver`
