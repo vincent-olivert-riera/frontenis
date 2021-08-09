@@ -1,0 +1,41 @@
+[MASTER]
+persistent = no
+
+[REPORTS]
+reports = no
+score = no
+output-format = colorized
+
+[MESSAGES CONTROL]
+disable =
+    # checkers
+    design,
+    # messages
+    bad-continuation,
+    cyclic-import,
+    duplicate-code,
+    file-ignored,
+    fixme,
+    global-statement,
+    interface-not-implemented,
+    invalid-name,
+    len-as-condition,
+    locally-disabled,
+    locally-enabled,
+    missing-docstring,
+    no-else-return,
+    redefined-outer-name,
+    redefined-variable-type,
+enable = useless-suppression
+
+[FORMAT]
+# Line length is controlled by "black"
+disable = line-too-long
+
+[TYPECHECK]
+ignored-classes = pytest
+#ignored-modules =
+#    requests.packages,
+#    sqlalchemy
+# Attribute of `enum.Enum` subclasses providing `OrderedDict` of members
+#generated-members = __members__
