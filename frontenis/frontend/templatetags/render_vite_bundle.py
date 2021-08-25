@@ -11,7 +11,7 @@ register = template.Library()
 
 
 @register.simple_tag
-def render_vite_bundle():
+def render_vite_bundle(entry_point):
     """
     Template tag to render a vite bundle.
     Supposed to only be used in production.
@@ -19,7 +19,9 @@ def render_vite_bundle():
     """
 
     try:
-        with open(f"{settings.VITE_APP_DIR}/../dist/manifest.json", "r") as fd:
+        with open(
+            f"{settings.VITE_APP_DIR}/dist/manifest.json", "r", encoding="UTF-8"
+        ) as fd:
             manifest = json.load(fd)
     except Exception as open_exception:
         raise RuntimeError(
@@ -29,12 +31,22 @@ def render_vite_bundle():
     imports_files = "".join(
         [
             f'<script type="module" src="/static/{manifest[file]["file"]}"></script>'
-            for file in manifest["src/main.js"]["imports"]
+            for file in manifest[entry_point]["imports"]
+        ]
+    )
+
+    css_files = "".join(
+        [
+            '<link rel="stylesheet" type="text/css" href="/static/{}" />'.format(
+                manifest[file]["css"][0]
+            )
+            for file in manifest[entry_point]["imports"]
+            if "css" in manifest[file]
         ]
     )
 
     return mark_safe(
-        f"""<script type="module" src="/static/{manifest['src/main.js']['file']}"></script>
-        <link rel="stylesheet" type="text/css" href="/static/{manifest['src/main.js']['css'][0]}" />
+        f"""<script type="module" src="/static/{manifest[entry_point]['file']}"></script>
+        {css_files}
         {imports_files}"""
     )

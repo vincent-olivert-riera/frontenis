@@ -23,16 +23,15 @@
           {{ $t("sign-in-message") }}
         </h2>
       </div>
-      <form class="mt-8 space-y-6" action="#" method="POST">
-        <input type="hidden" name="remember" value="true" />
+      <form class="mt-8 space-y-6" @submit.prevent="login">
         <div class="rounded-md shadow-sm -space-y-px">
           <div>
-            <label for="email-address" class="sr-only">{{ $t("email") }}</label>
+            <label for="username" class="sr-only">{{ $t("username") }}</label>
             <input
-              id="email-address"
-              name="email"
-              type="email"
-              autocomplete="email"
+              id="username"
+              name="username"
+              type="text"
+              autocomplete="username"
               required=""
               class="
                 appearance-none
@@ -45,16 +44,19 @@
                 border border-gray-300
                 placeholder-gray-500
                 text-gray-900
-                rounded-t-md
+                rounded-md
                 focus:outline-none
                 focus:ring-blue-500
                 focus:border-blue-500
                 focus:z-10
                 sm:text-sm
               "
-              :placeholder="$t('email')"
+              :placeholder="$t('username')"
             />
           </div>
+        </div>
+
+        <div class="rounded-md shadow-sm -space-y-px">
           <div>
             <label for="password" class="sr-only">{{ $t('password') }}</label>
             <input
@@ -74,7 +76,7 @@
                 border border-gray-300
                 placeholder-gray-500
                 text-gray-900
-                rounded-b-md
+                rounded-md
                 focus:outline-none
                 focus:ring-blue-500
                 focus:border-blue-500
@@ -83,36 +85,6 @@
               "
               :placeholder="$t('password')"
             />
-          </div>
-        </div>
-
-        <div class="flex items-center justify-between">
-          <div class="flex items-center">
-            <input
-              id="remember-me"
-              name="remember-me"
-              type="checkbox"
-              class="
-                h-4
-                w-4
-                text-blue-600
-                focus:ring-blue-500
-                border-gray-300
-                rounded
-              "
-            />
-            <label for="remember-me" class="ml-2 block text-sm text-gray-900">
-              {{ $t("remember-me") }}
-            </label>
-          </div>
-
-          <div class="text-sm">
-            <a
-              href="#"
-              class="font-medium text-blue-600 hover:text-blue-500"
-            >
-              {{ $t("forgot-password") }}
-            </a>
           </div>
         </div>
 
@@ -147,3 +119,25 @@
     </div>
   </div>
 </template>
+
+<script>
+import axios from "axios";
+
+export default {
+  methods: {
+    login(ev) {
+      axios.post(
+        "/api/v1/login",
+        {
+          "username": ev.target.elements.username.value,
+          "password": ev.target.elements.password.value,
+        },
+      ).then(() => {
+        window.location.replace("/");
+      }).catch(err => {
+        console.log("Error", err);
+      });
+    },
+  },
+};
+</script>

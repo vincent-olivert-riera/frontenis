@@ -15,17 +15,24 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
+from django.views.static import serve
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("api/", include("api.urls")),
     path("", include("frontend.urls")),
 ]
 
-if not settings.DEBUG:
-    from django.urls import re_path
-    from django.views.static import serve
-
+if settings.DEBUG:
+    urlpatterns.append(
+        re_path(
+            r"^assets/(?P<path>.*)$",
+            serve,
+            {"document_root": settings.VITE_APP_DIR / "assets"},
+        ),
+    )
+else:
     urlpatterns.append(
         re_path(
             r"^static/(?P<path>.*)$",
@@ -38,12 +45,5 @@ if not settings.DEBUG:
             r"^assets/(?P<path>.*)$",
             serve,
             {"document_root": settings.STATIC_ROOT / "assets"},
-        ),
-    )
-    urlpatterns.append(
-        re_path(
-            r"^(?P<path>favicon\.ico)$",
-            serve,
-            {"document_root": settings.STATIC_ROOT},
         ),
     )

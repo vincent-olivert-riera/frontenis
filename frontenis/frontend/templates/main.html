@@ -1,0 +1,25 @@
+{% load render_vite_bundle %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    {% if debug %}
+    <link rel="icon" href="http://localhost:3000/assets/favicon.ico" />
+    {% else %}
+    <link rel="icon" href="/static/favicon.ico" />
+    {% endif %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    {% if debug %}
+    <script type="module" src="http://localhost:3000/@vite/client"></script>
+    {% endif %}
+  </head>
+  <body>
+    <div id="app"></div>
+    {% if debug %}
+    <script type="module" src="http://localhost:3000/main.js"></script>
+    {% else %}
+    {% render_vite_bundle "main.html" %}
+    {% endif %}
+  </body>
+</html>

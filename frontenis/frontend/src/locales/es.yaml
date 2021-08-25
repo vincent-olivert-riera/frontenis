@@ -1,7 +1,5 @@
 # Login.vue
-email: Correo electrónico
-forgot-password: ¿Olvidó su contraseña?
 password: Contraseña
-remember-me: Recordarme
 sign-in: Entrar
 sign-in-message: Iniciar sessión
+username: Usuario
