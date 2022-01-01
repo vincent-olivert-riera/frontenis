@@ -1,8 +1,7 @@
 <template>
-  <Dummy />
+  <Navbar />
 </template>
 
 <script setup>
-import Dummy from "./components/Dummy.vue";
-
+import Navbar from "./components/Navbar.vue";
 </script>

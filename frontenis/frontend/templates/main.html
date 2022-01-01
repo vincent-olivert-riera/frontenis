@@ -18,8 +18,6 @@
     <div id="app"></div>
     {% if debug %}
     <script type="module" src="http://localhost:3000/main.js"></script>
-    {% else %}
-    {% render_vite_bundle "main.html" %}
-    {% endif %}
+    {% else %} {% render_vite_bundle "main.html" %} {% endif %}
   </body>
 </html>

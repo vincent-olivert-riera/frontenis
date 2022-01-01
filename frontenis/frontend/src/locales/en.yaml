@@ -3,3 +3,7 @@ password: Password
 sign-in: Enter
 sign-in-message: Sign in
 username: User
+
+# Navbar.vue
+availability: Availability
+logout: Logout

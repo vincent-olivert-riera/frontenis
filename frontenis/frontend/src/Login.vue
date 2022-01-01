@@ -14,11 +14,7 @@
   >
     <div class="max-w-md w-full space-y-8">
       <div>
-        <img
-          class="mx-auto h-12 w-auto"
-          src="/assets/logo.png"
-          alt="Logo"
-        />
+        <img class="mx-auto h-28 w-auto" src="/assets/logo.png" alt="Logo" />
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
           {{ $t("sign-in-message") }}
         </h2>
@@ -58,7 +54,7 @@
 
         <div class="rounded-md shadow-sm -space-y-px">
           <div>
-            <label for="password" class="sr-only">{{ $t('password') }}</label>
+            <label for="password" class="sr-only">{{ $t("password") }}</label>
             <input
               id="password"
               name="password"
@@ -126,17 +122,17 @@ import axios from "axios";
 export default {
   methods: {
     login(ev) {
-      axios.post(
-        "/api/v1/login",
-        {
-          "username": ev.target.elements.username.value,
-          "password": ev.target.elements.password.value,
-        },
-      ).then(() => {
-        window.location.replace("/");
-      }).catch(err => {
-        console.log("Error", err);
-      });
+      axios
+        .post("/api/v1/login", {
+          username: ev.target.elements.username.value,
+          password: ev.target.elements.password.value,
+        })
+        .then(() => {
+          window.location.replace("/");
+        })
+        .catch((err) => {
+          console.log("Error", err);
+        });
     },
   },
 };
