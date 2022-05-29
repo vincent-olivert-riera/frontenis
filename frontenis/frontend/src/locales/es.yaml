@@ -1,9 +1,9 @@
-# Login.vue
+# LoginPage.vue
 password: Contraseña
 sign-in: Entrar
 sign-in-message: Iniciar sessión
 username: Usuario
 
-# Navbar.vue
+# NavigationBar.vue
 availability: Disponibilidad
 logout: Salir

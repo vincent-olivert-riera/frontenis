@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import App from "./Login.vue";
+import App from "./LoginPage.vue";
 import "./index.css";
 
 import { createI18n } from "vue-i18n";
